@@ -12,11 +12,11 @@ You can view the source file [here](https://github.com/iaseth/redicons/blob/mast
 | Name                     | Count | Prefix  | Taken from                                     |
 | ------------------------ | ----- | ------- | ---------------------------------------------- |
 | Bootstrap                | 2051  | `bs-`   | [`twbs/icons`](https://github.com/twbs/icons)                    |
-| Material Icons Filled    | -     | `gmf-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
-| Material Icons Outlined  | -     | `gmo-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
-| Material Icons Round     | -     | `gmr-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
-| Material Icons Sharp     | -     | `gms-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
-| Material Icons Two-tone  | -     | `gm2-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
+| Material Icons Filled    | 2122  | `gmf-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
+| Material Icons Outlined  | 2119  | `gmo-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
+| Material Icons Round     | 2122  | `gmr-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
+| Material Icons Sharp     | 2122  | `gms-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
+| Material Icons Two-tone  | 2120  | `gm2-`  | [`marella/material-design-icons`](https://github.com/marella/material-design-icons) |
 
 
 
