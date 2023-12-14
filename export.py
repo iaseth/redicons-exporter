@@ -10,7 +10,7 @@ ICON_PACKS = [
 	{"name": "Material Icons Outlined", "prefix": "gmo", "path": "icons/material-icons/outlined"},
 	{"name": "Material Icons Round", "prefix": "gmr", "path": "icons/material-icons/round"},
 	{"name": "Material Icons Sharp", "prefix": "gms", "path": "icons/material-icons/sharp"},
-	# {"name": "Material Icons Two-tone", "prefix": "gm2", "path": "icons/material-icons/two-tone"},
+	{"name": "Material Icons Two-tone", "prefix": "gm2", "path": "icons/material-icons/two-tone"},
 ]
 
 OUTPUT_JSON_PATH = "out/redicons.full.json"
@@ -18,10 +18,10 @@ OUTPUT_MIN_JSON_PATH = "out/redicons.min.json"
 OUTPUT_NAMES_JSON_PATH = "out/iconnames.json"
 
 KNOWN_TAGS = [
-	{"name": "path", "knownAttrs": ["d", "fill-rule", "fill-opacity"]},
+	{"name": "path", "knownAttrs": ["d", "fill-rule", "fill-opacity", "opacity"]},
 	{"name": "symbol", "knownAttrs": ["id", "class", "viewbox"]},
-	{"name": "circle", "knownAttrs": ["cx", "cy", "r", "fill-rule"]},
-	{"name": "ellipse", "knownAttrs": ["cx", "cy", "rx", "ry"]},
+	{"name": "circle", "knownAttrs": ["cx", "cy", "r", "fill-rule", "opacity"]},
+	{"name": "ellipse", "knownAttrs": ["cx", "cy", "rx", "ry", "opacity"]},
 	{"name": "rect", "knownAttrs": ["width", "height", "x", "y", "rx", "ry", "transform"]}
 ]
 KNOWN_TAG_NAMES = [tag["name"] for tag in KNOWN_TAGS]
@@ -94,7 +94,11 @@ def get_icons_from_icon_pack(icon_pack):
 			print(f"\tSVG contains unknown Tags or Attributes: ({svg_filepath})")
 			continue
 
-		icon_name = f"{prefix}-{svg_filename[:-4]}" if prefix else svg_filename[:-4]
+		# every pack has a suffux
+		icon_name = f"{prefix}-{svg_filename[:-4]}"
+		# material icons had underscores, replaces them with a dash
+		icon_name = icon_name.replace("_", "-")
+
 		tags, className = retval
 		icon = {}
 		icon["name"] = icon_name
