@@ -21,6 +21,7 @@ KNOWN_TAGS = [
 	{"name": "path", "knownAttrs": ["d", "fill-rule", "fill-opacity"]},
 	{"name": "symbol", "knownAttrs": ["id", "class", "viewbox"]},
 	{"name": "circle", "knownAttrs": ["cx", "cy", "r", "fill-rule"]},
+	{"name": "ellipse", "knownAttrs": ["cx", "cy", "rx", "ry"]},
 	{"name": "rect", "knownAttrs": ["width", "height", "x", "y", "rx", "ry", "transform"]}
 ]
 KNOWN_TAG_NAMES = [tag["name"] for tag in KNOWN_TAGS]
