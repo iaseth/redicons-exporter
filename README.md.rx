@@ -1,0 +1,15 @@
+
+# RedIcons
+[RedIcons](https://redicons.redpapr.com/) provides you with an easy way to use
+[Bootstrap Icons](https://icons.getbootstrap.com/) in your React projects.
+
+I am using {{ gh.link("iaseth/readmix", "readmix") }} for generating this README.
+You can view the source file [here](https://github.com/iaseth/redicons/blob/master/README.md.rx).
+
+
+
+## License
+{{ "LICENSE.md" | File }}
+
+
+{{ giveCredit() }}
