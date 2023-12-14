@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 ICON_PACKS = [
-	{"framework": "bs", "path": "icons/bootstrap-icons"}
+	{"framework": "bs", "prefix": "bs", "path": "icons/bootstrap-icons"}
 ]
 
 OUTPUT_JSON_PATH = "out/redicons.full.json"
@@ -75,6 +75,7 @@ def get_tag_object(tag):
 
 def main():
 	for icon_pack in ICON_PACKS:
+		prefix = icon_pack['prefix']
 		svg_dirpath = icon_pack['path']
 		files = os.listdir(svg_dirpath)
 		svg_filenames = [file for file in files if file.endswith(".svg")]
@@ -88,9 +89,10 @@ def main():
 				print(f"\tSVG contains unknown Tags or Attributes: ({svg_filepath})")
 				continue
 
+			icon_name = f"{prefix}-{svg_filename[:-4]}" if prefix else svg_filename[:-4]
 			tags, className = retval
 			icon = {}
-			icon["name"] = svg_filename[:-4]
+			icon["name"] = icon_name
 			icon["className"] = className
 			icon["paths"] = [get_tag_object(tag) for tag in tags if tag.name == "path"]
 			icon["symbols"] = [get_tag_object(tag) for tag in tags if tag.name == "symbol"]
