@@ -106,6 +106,7 @@ def get_icons_from_icon_pack(icon_pack):
 		icon["paths"] = [get_tag_object(tag) for tag in tags if tag.name == "path"]
 		icon["symbols"] = [get_tag_object(tag) for tag in tags if tag.name == "symbol"]
 		icon["circles"] = [get_tag_object(tag) for tag in tags if tag.name == "circle"]
+		icon["ellipses"] = [get_tag_object(tag) for tag in tags if tag.name == "ellipse"]
 		icon["rects"] = [get_tag_object(tag) for tag in tags if tag.name == "rect"]
 		icons.append(icon)
 		# break
@@ -127,7 +128,7 @@ def main():
 	print(f"Saved: {OUTPUT_JSON_PATH} ({len(icons)} icons)")
 
 	# some cleanup to minimize the size of npm package
-	array_names = ["paths", "symbols", "circles", "rects"]
+	array_names = ["paths", "symbols", "circles", "ellipses", "rects"]
 	for icon in icons:
 		del icon["className"] # delete className as not needed
 		for array_name in array_names:
