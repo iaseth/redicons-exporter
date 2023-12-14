@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 ICON_PACKS = [
-	{"framework": "bs", "prefix": "bs", "path": "icons/bootstrap-icons"}
+	{"name": "Bootstrap", "prefix": "bs", "path": "icons/bootstrap-icons"}
 ]
 
 OUTPUT_JSON_PATH = "out/redicons.full.json"
@@ -73,33 +73,42 @@ def get_tag_object(tag):
 	return jo
 
 
+def get_icons_from_icon_pack(icon_pack):
+	prefix = icon_pack['prefix']
+	svg_dirpath = icon_pack['path']
+	files = os.listdir(svg_dirpath)
+	svg_filenames = [file for file in files if file.endswith(".svg")]
+
+	icons = []
+	for idx, svg_filename in enumerate(svg_filenames):
+		# print(f"{idx+1:4} => {svg_filename}")
+		svg_filepath = os.path.join(svg_dirpath, svg_filename)
+		retval = verify_svg_and_get_tags(svg_filepath)
+		if not retval:
+			print(f"\tSVG contains unknown Tags or Attributes: ({svg_filepath})")
+			continue
+
+		icon_name = f"{prefix}-{svg_filename[:-4]}" if prefix else svg_filename[:-4]
+		tags, className = retval
+		icon = {}
+		icon["name"] = icon_name
+		icon["className"] = className
+		icon["paths"] = [get_tag_object(tag) for tag in tags if tag.name == "path"]
+		icon["symbols"] = [get_tag_object(tag) for tag in tags if tag.name == "symbol"]
+		icon["circles"] = [get_tag_object(tag) for tag in tags if tag.name == "circle"]
+		icon["rects"] = [get_tag_object(tag) for tag in tags if tag.name == "rect"]
+		icons.append(icon)
+		# break
+	return icons
+
+
 def main():
-	for icon_pack in ICON_PACKS:
-		prefix = icon_pack['prefix']
-		svg_dirpath = icon_pack['path']
-		files = os.listdir(svg_dirpath)
-		svg_filenames = [file for file in files if file.endswith(".svg")]
-
-		icons = []
-		for idx, svg_filename in enumerate(svg_filenames):
-			# print(f"{idx+1:4} => {svg_filename}")
-			svg_filepath = os.path.join(svg_dirpath, svg_filename)
-			retval = verify_svg_and_get_tags(svg_filepath)
-			if not retval:
-				print(f"\tSVG contains unknown Tags or Attributes: ({svg_filepath})")
-				continue
-
-			icon_name = f"{prefix}-{svg_filename[:-4]}" if prefix else svg_filename[:-4]
-			tags, className = retval
-			icon = {}
-			icon["name"] = icon_name
-			icon["className"] = className
-			icon["paths"] = [get_tag_object(tag) for tag in tags if tag.name == "path"]
-			icon["symbols"] = [get_tag_object(tag) for tag in tags if tag.name == "symbol"]
-			icon["circles"] = [get_tag_object(tag) for tag in tags if tag.name == "circle"]
-			icon["rects"] = [get_tag_object(tag) for tag in tags if tag.name == "rect"]
-			icons.append(icon)
-			# break
+	icons = []
+	print(f"Looking through {len(ICON_PACKS)} icon packs:")
+	for idx, icon_pack in enumerate(ICON_PACKS):
+		icons_in_current_pack = get_icons_from_icon_pack(icon_pack)
+		icons.extend(icons_in_current_pack)
+		print(f"\t{idx+1}. Added {len(icons_in_current_pack)} icons from {icon_pack['name']}")
 
 	jo = {}
 	jo["icons"] = icons
