@@ -5,7 +5,12 @@ from bs4 import BeautifulSoup
 
 
 ICON_PACKS = [
-	{"name": "Bootstrap", "prefix": "bs", "path": "icons/bootstrap-icons"}
+	{"name": "Bootstrap", "prefix": "bs", "path": "icons/bootstrap-icons"},
+	{"name": "Material Icons Filled", "prefix": "gmf", "path": "icons/material-icons/filled"},
+	{"name": "Material Icons Outlined", "prefix": "gmo", "path": "icons/material-icons/outlined"},
+	{"name": "Material Icons Round", "prefix": "gmr", "path": "icons/material-icons/round"},
+	{"name": "Material Icons Sharp", "prefix": "gms", "path": "icons/material-icons/sharp"},
+	# {"name": "Material Icons Two-tone", "prefix": "gm2", "path": "icons/material-icons/two-tone"},
 ]
 
 OUTPUT_JSON_PATH = "out/redicons.full.json"

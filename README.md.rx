@@ -8,6 +8,18 @@ You can view the source file [here](https://github.com/iaseth/redicons/blob/mast
 
 
 
+## Icon Packs
+| Name                     | Count | Prefix  | Taken from                                     |
+| ------------------------ | ----- | ------- | ---------------------------------------------- |
+| Bootstrap                | 2051  | `bs-`   | {{ gh.link("twbs/icons") }}                    |
+| Material Icons Filled    | -     | `gmf-`  | {{ gh.link("marella/material-design-icons") }} |
+| Material Icons Outlined  | -     | `gmo-`  | {{ gh.link("marella/material-design-icons") }} |
+| Material Icons Round     | -     | `gmr-`  | {{ gh.link("marella/material-design-icons") }} |
+| Material Icons Sharp     | -     | `gms-`  | {{ gh.link("marella/material-design-icons") }} |
+| Material Icons Two-tone  | -     | `gm2-`  | {{ gh.link("marella/material-design-icons") }} |
+
+
+
 ## License
 {{ "LICENSE.md" | File }}
 
