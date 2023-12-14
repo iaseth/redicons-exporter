@@ -20,7 +20,7 @@ OUTPUT_NAMES_JSON_PATH = "out/iconnames.json"
 KNOWN_TAGS = [
 	{"name": "path", "knownAttrs": ["d", "fill-rule", "fill-opacity"]},
 	{"name": "symbol", "knownAttrs": ["id", "class", "viewbox"]},
-	{"name": "circle", "knownAttrs": ["cx", "cy", "r"]},
+	{"name": "circle", "knownAttrs": ["cx", "cy", "r", "fill-rule"]},
 	{"name": "rect", "knownAttrs": ["width", "height", "x", "y", "rx", "ry", "transform"]}
 ]
 KNOWN_TAG_NAMES = [tag["name"] for tag in KNOWN_TAGS]
@@ -47,7 +47,7 @@ def verify_svg_and_get_tags(svg_filepath):
 	tags = svg_tag.find_all()
 	for tag in tags:
 		if tag.name not in KNOWN_TAG_NAMES:
-			print(f"\tUnknown tag found: {tag.name} ({svg_filepath})")
+			print(f"\t\t[TAG] Unknown tag found: {tag.name} ({svg_filepath})")
 			return False
 
 		knownAttrs = []
@@ -57,7 +57,7 @@ def verify_svg_and_get_tags(svg_filepath):
 
 		for attr in tag.attrs:
 			if attr not in knownAttrs:
-				print(f"\t\tUnknown '{tag.name}' attr found: '{attr}' ({svg_filepath})")
+				print(f"\t\t\t[ATTR] Unknown '{tag.name}' attr found: '{attr}' ({svg_filepath})")
 				return False
 
 	return tags, className
