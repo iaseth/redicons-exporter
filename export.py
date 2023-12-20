@@ -4,6 +4,8 @@ import os
 from bs4 import BeautifulSoup
 
 
+MAX_ICON_SIZE = 1024 * 200
+
 ICON_PACKS = [
 	{"name": "Bootstrap", "prefix": "bs", "path": "icons/bootstrap-icons"},
 	{"name": "Material Icons Filled", "prefix": "gmf", "path": "icons/material-icons/filled"},
@@ -34,6 +36,13 @@ BETTER_ATTR_NAMES = {
 }
 
 def verify_svg_and_get_tags(svg_filepath):
+	if not os.path.isfile(svg_filepath):
+		print(f"\tFile not found: {svg_filepath}")
+		return False
+	elif os.path.getsize(svg_filepath) > MAX_ICON_SIZE:
+		print(f"\tFile size too big: {svg_filepath}")
+		return False
+
 	with open(svg_filepath) as f:
 		soup = BeautifulSoup(f.read(), "lxml")
 
@@ -44,6 +53,7 @@ def verify_svg_and_get_tags(svg_filepath):
 
 	svg_tag = svg_tags[0]
 	className = " ".join(svg_tag.attrs["class"]) if "class" in svg_tag.attrs else ""
+	viewBox = svg_tag.attrs["viewbox"]
 
 	tags = svg_tag.find_all()
 	for tag in tags:
@@ -61,7 +71,7 @@ def verify_svg_and_get_tags(svg_filepath):
 				print(f"\t\t\t[ATTR] Unknown '{tag.name}' attr found: '{attr}' ({svg_filepath})")
 				return False
 
-	return tags, className
+	return tags, className, viewBox
 
 
 def get_attr_name(attr):
@@ -99,10 +109,11 @@ def get_icons_from_icon_pack(icon_pack):
 		# material icons had underscores, replaces them with a dash
 		icon_name = icon_name.replace("_", "-")
 
-		tags, className = retval
+		tags, className, viewBox = retval
 		icon = {}
 		icon["name"] = icon_name
 		icon["className"] = className
+		icon["viewBox"] = viewBox
 		icon["paths"] = [get_tag_object(tag) for tag in tags if tag.name == "path"]
 		icon["symbols"] = [get_tag_object(tag) for tag in tags if tag.name == "symbol"]
 		icon["circles"] = [get_tag_object(tag) for tag in tags if tag.name == "circle"]
